@@ -1,5 +1,4 @@
 #include<iostream>
-
 using namespace std;
 
 struct ListNode {
@@ -9,20 +8,28 @@ ListNode() : val(0), next(nullptr) {}
 ListNode(int x) : val(x), next(nullptr) {}
 ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
-bool hasCycle(ListNode *head) {
+
+ListNode* detectCycle(ListNode* head){
     ListNode* slow = head;
     ListNode* fast = head;
     while (fast != nullptr && fast->next != nullptr)
     {
         slow = slow->next;
         fast = fast->next->next;
-        if(fast == slow){
-            return true;
+        if (fast == slow){
+            slow = head;
+            while (slow != fast)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            return slow;
+            
         }
     }
-    return false;
-    
+    return head;
 }
 
 int main(){
+
 }
