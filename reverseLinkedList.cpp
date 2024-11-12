@@ -12,21 +12,14 @@ ListNode(int x, ListNode *next) : val(x), next(next) {}
 
 
 ListNode* reverseList(ListNode* head) {
-    stack<int> st;
-    ListNode* temp = head;
-    while (temp != nullptr)
-    {
-        st.push(temp->val);
-        temp = temp->next;
+    if (head == NULL || head->next == NULL) {
+        return head;
     }
-    temp = head;
-    while (temp != nullptr)
-    {
-        temp->val = st.top();
-        st.pop();
-        temp = temp->next;
-    }
-    return head;
+    ListNode* newHead = reverseList(head->next);
+    ListNode* front = head->next;
+    front->next = head;
+    head->next = nullptr;
+    return newHead;
 }
 
 int main(){
